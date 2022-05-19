@@ -29,7 +29,7 @@ const roomId = sessionStorage.getItem('userId');
         await setDoc(docRef, room);
         dispatch(getRooms('rooms'));
         sessionStorage.setItem('payer', 'playerOne');
-        /* navigate('/game/' + roomId); */
+        navigate('/game/' + roomId);
     }
     async function handleJoinRoom(id){
         console.log('id', id);
@@ -40,7 +40,7 @@ const roomId = sessionStorage.getItem('userId');
         };
         await updateDoc(docRef, room);
         sessionStorage.setItem('payer', 'playerTwo');
-        /* navigate('/game/' + roomId); */
+        navigate('/game/' + roomId);
     }
     return(
         <div>
