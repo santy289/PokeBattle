@@ -1,11 +1,45 @@
 import './PokemonCard.css';
+import { db } from '../../config/firebase.js';
 import image from '../../assets/pokedex.png';
+import { doc, updateDoc } from 'firebase/firestore';
 import black from '../../assets/blackball.png'
+import { useSelector, useDispatch } from 'react-redux';
+import { getinfo } from '../../store/actions';
+import { useParams } from 'react-router-dom';
+
 
 function PokemonCard (props){
+    const { id }  = useParams();
+    const dispatch = useDispatch();
+    const userid = sessionStorage.getItem('userId');
+    const { hand } = useSelector(state => state.userInfo);
     
-    return (
-       
+    async function handleAddHand(card){
+        if (!hand[5]){
+        hand.push(card)
+        const docRef = doc(db, 'users', userid);
+        const newhand = {
+            hand: hand,
+        }
+        await updateDoc(docRef, newhand);
+        dispatch(getinfo(userid));
+        alert(card.name+ ' added to your hand');
+        }
+        else{
+            alert('You only can carry six cards in your hand, you actual pokemons:\n' + hand.map(card => card.name).join('\n'));
+        }
+    }
+    const handleClearHand = () => {
+        console.log(hand);
+        const docRef = doc(db, 'users', userid);
+        const newhand = {
+            hand: [],
+        }
+        updateDoc(docRef, newhand);
+        dispatch(getinfo(userid));
+        alert('Your hand is empty');
+    }
+    return ( 
     <div className = "card__pokemon-container" style={{ backgroundImage: `url(${props.image})` }}>
         <div>
             <div className="card__tittle--container">
@@ -13,7 +47,14 @@ function PokemonCard (props){
                 {props.catch === true?
                 <div>
                     <img className="pokemon__card--logo" src={image} alt="pokecard"></img>
-                    <button className="pokemon__card--button">Agregar a mi mano</button> 
+                    {id.length < 3 ?
+                    <div>
+                     <button onClick={handleClearHand} className="card__tittle--button_clear">Clear Hand</button>
+                    <button onClick={()=>handleAddHand(props)} className="pokemon__card--button">Add to my hand</button>
+                    </div>
+                    :null
+                    }
+                   
                 </div>
                 :
                 <img className="pokemon__card--logo--uncatch" src={black} alt="pokecard"></img>

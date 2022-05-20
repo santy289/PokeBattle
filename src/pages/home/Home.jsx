@@ -2,7 +2,7 @@
 import Header from '../../components/header/Header';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from '../../config/firebase'
 import { getinfo } from '../../store/actions'
 import { Link } from 'react-router-dom';
@@ -14,9 +14,12 @@ import './home.css';
 import Background from '../../assets/background.jpg';
 
 function Home () {
+    const id = sessionStorage.getItem('userId');
+    console.log(id);
     const userInfo = useSelector(state => state.userInfo);
     const dispatch = useDispatch();
     const [loginStatus, setLoginStatus] = useState(false);
+    console.log(loginStatus);
 
       const login = async (values) => {
         try {
@@ -30,14 +33,15 @@ function Home () {
           alert(errorCode, errorMessage);
         }
       };
-      function handleLogout() {
-        auth.signOut();
+      async function handleLogout() {
+        await signOut(auth);
+        sessionStorage.clear();
         setLoginStatus(false);
         };   
       useEffect(() => {
-        if (userInfo.userName=== undefined) {
+        if (!id) {
             setLoginStatus(false);
-        }else{
+        }else if (id){
             setLoginStatus(true);
         }
         }, [])
@@ -90,7 +94,7 @@ function Home () {
                         </Form>
                     )}
                 </Formik>
-                    : userInfo.avatar? 
+                    : userInfo.avatar && loginStatus === true? 
                     <div className="home__loged--container">
                     <p className="home__loged--text">Welcome back  </p>
                     <h1 className="home__loged--name">{userInfo.userName}</h1>

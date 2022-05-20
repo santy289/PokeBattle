@@ -4,11 +4,13 @@ import { getRooms } from '../../store/actions'
 import { setDoc, doc, updateDoc } from 'firebase/firestore';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { listeningRealTime, upDateRealTime } from '../../utils/realTime'
 import './lobby.css';
 
-const roomId = sessionStorage.getItem('userId');
-
  function Lobby () {
+    const roomId = sessionStorage.getItem('userId');
+    const [rooms, setRooms] = useState([]);
     const navigate = useNavigate();
     const { userName } = useSelector(state => state.userInfo);
     const totalRoom = useSelector(state => state.totalRooms);
@@ -18,7 +20,7 @@ const roomId = sessionStorage.getItem('userId');
         const docRef = doc(db, 'rooms', roomId);
         const room = {
             createdAt: new Date(),
-            playeone: userName,
+            playerone: userName,
             playertwo: '',
             payerOnehand: [],   
             payerTwohand: [],
@@ -28,20 +30,26 @@ const roomId = sessionStorage.getItem('userId');
         };
         await setDoc(docRef, room);
         dispatch(getRooms('rooms'));
-        sessionStorage.setItem('payer', 'playerOne');
+        sessionStorage.setItem('player', 'playerOne');
         navigate('/game/' + roomId);
     }
-    async function handleJoinRoom(id){
-        console.log('id', id);
+    async function handleJoinRoom(id, index){
         const docRef = doc(db, 'rooms', id);
         const room = {
             playertwo: userName, 
-            payerTwohand: [],
+            playerTwohand: [],
         };
         await updateDoc(docRef, room);
-        sessionStorage.setItem('payer', 'playerTwo');
-        navigate('/game/' + roomId);
+        upDateRealTime(`rooms/${index}`, room)
+        dispatch(getRooms('rooms'));
+        sessionStorage.setItem('player', 'playerTwo');
+        navigate('/game/' + id);
     }
+    useEffect(() => {
+        setRooms(totalRoom);
+        dispatch(getRooms('rooms'));
+        listeningRealTime('rooms', setRooms)
+    }, [totalRoom, dispatch]);
     return(
         <div>
             <Header />
@@ -49,15 +57,15 @@ const roomId = sessionStorage.getItem('userId');
             <div className="lobby__main--container">
                 <h1 className="lobby__main--title">Lobby</h1>
                 <div className="lobby__main--list">
-                    {totalRoom.map(room => (
+                    {rooms?.map((room, index) => (
                         <div className="lobby__main--list--item" key={room.roomId}>
-                            {room.playeone ?
+                            {room.playerone ?
                             <div>
-                            <p className="lobby__main--list_id">Room id:{room.roomId}</p>
-                            <p className="lobby__main--list_player">player one: {room.playeone}</p>
-                            <p className="lobby__main--list_player">player two: {room.playplayertwo}</p>
+                            <p className="lobby__main--list_id">Room id: {room.roomId}</p>
+                            <p className="lobby__main--list_player">player one: {room.playerone}</p>
+                            <p className="lobby__main--list_player">player two: {room.playertwo}</p>
                             {!room.playplayertwo ?
-                                <button onClick={handleJoinRoom(room.roomId)} className="lobby__join--button">Join</button>
+                                <button onClick={()=>handleJoinRoom(room.roomId, index)} className="lobby__join--button">Join</button>
                                 :
                                 <p>Room is full</p>
                             }

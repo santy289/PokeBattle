@@ -9,6 +9,7 @@ const initialValues = {
         email: '',
         history: [],
         points: 0,
+        hand: [],
         pokemons: [],
         username: '',
     },

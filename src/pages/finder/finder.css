@@ -1,0 +1,6 @@
+.finder__hand--container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0px 20px;
+}

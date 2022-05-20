@@ -7,7 +7,7 @@ function Finder(){
 const { id }  = useParams();
 const { pokemons } = useSelector(state => state.userInfo);
 const pokemon = pokemons.find(pokedata=>pokedata.id===parseInt(id));
-console.log(pokemon);
+
 return(
     <div>
         <Header/>

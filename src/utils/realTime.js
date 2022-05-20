@@ -1,5 +1,5 @@
 import {
-    ref, onValue, set,
+    ref, onValue, set, update,
   } from 'firebase/database';
   import { realTimeDB } from '../config/firebase';
   
@@ -10,7 +10,6 @@ import {
       onValue(refListening, (snapshot) => {
         data = snapshot.val();
         setProp(data);
-        setTimeout(() => { setProp(null); }, 5000);
       });
     }
   }
@@ -18,4 +17,8 @@ import {
   export async function emitRealTime(channel, object) {
     const refEmit = ref(realTimeDB, channel);
     set(refEmit, object);
+  }
+  export async function upDateRealTime(channel, object) {
+    const refEmit = ref(realTimeDB, channel);
+    update(refEmit, object);
   }

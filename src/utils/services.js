@@ -99,8 +99,9 @@ import {
     return res;
   }
   
-  export async function editDocById(collectionName, id, data) {
-    const docRef = doc(db, collectionName, id);
+  export async function editDocById(docRef, data) {
+    console.log(docRef,'DocRef');
+    console.log(data, 'Data');
     const res = await updateDoc(docRef, data);
     return res;
   }
