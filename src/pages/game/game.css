@@ -3,4 +3,66 @@
     align-items: center;
     width: 100%;
     padding: 0px 20px;
+    justify-content: center;
+}
+.game__battlecards--container{
+    min-width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 1fr 3fr;
+    align-items: center;
+    justify-items: center;
+}
+.game__battlecard--img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+@keyframes blink {
+    0%   {opacity: 0}
+    20%  {opacity: 0}
+    40%  {opacity: 0.5}
+    60% {opacity: 1}
+    80%  {opacity: 0.5}
+    100% {opacity: 0}
+}
+
+.game__battlecard--waiting {
+    margin-top: 50px;
+    width: 300px;
+    height: 300px;
+    animation-name: blink;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+.game__handtwo--waiting{
+    color: rgb(228, 84, 79);
+    margin-top: 50px;
+    text-align: center;
+    width: 100%;
+    animation-name: blink;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+.img_unknow{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.img__unknow--container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.game__handtwo--container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 50px;
+}
+.game__handtwo--cards{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

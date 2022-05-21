@@ -47,7 +47,7 @@ function PokemonCard (props){
                 {props.catch === true?
                 <div>
                     <img className="pokemon__card--logo" src={image} alt="pokecard"></img>
-                    {id.length < 3 ?
+                    {id.length < 4 ?
                     <div>
                      <button onClick={handleClearHand} className="card__tittle--button_clear">Clear Hand</button>
                     <button onClick={()=>handleAddHand(props)} className="pokemon__card--button">Add to my hand</button>

@@ -20,5 +20,5 @@ import {
   }
   export async function upDateRealTime(channel, object) {
     const refEmit = ref(realTimeDB, channel);
-    update(refEmit, object);
+    update(refEmit, object, { merge: true });
   }

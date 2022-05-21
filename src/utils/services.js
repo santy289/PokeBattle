@@ -99,9 +99,7 @@ import {
     return res;
   }
   
-  export async function editDocById(docRef, data) {
-    console.log(docRef,'DocRef');
-    console.log(data, 'Data');
+  export async function editDocById(docRef, data) { 
     const res = await updateDoc(docRef, data);
     return res;
   }

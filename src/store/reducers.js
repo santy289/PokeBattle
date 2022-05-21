@@ -1,6 +1,7 @@
 import {
     USER_INFO,
     TOTAL_ROOMS,
+    GAME,
 } from './types';
 
 const initialValues = {
@@ -14,6 +15,7 @@ const initialValues = {
         username: '',
     },
     totalRooms: [],
+    game: {},
 };
 
 function reducer (state = initialValues, action) {
@@ -27,6 +29,11 @@ function reducer (state = initialValues, action) {
             return {
                 ...state,
                 totalRooms: action.payload,
+            };
+        case GAME:
+            return {
+                ...state,
+                game: action.payload,
             };
         default:
             return state;
