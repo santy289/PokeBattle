@@ -9,6 +9,7 @@ import versus from '../../assets/versus.png';
 import shadow1 from '../../assets/rayquazashadow.png';
 import shadow2 from '../../assets/lugiashadow.jpg';
 import unknow from '../../assets/unknownicon.png';
+import pokecard from '../../assets/pokecard.png'
 
 import './game.css';
 
@@ -16,8 +17,9 @@ function Game (){
     const userid = sessionStorage.getItem('userId');
     const [cardOne , setCardOne] = useState([]);
     const [cardTwo , setCardTwo] = useState([]);
+
     const [info, setInfo] = useState()
-    console.log(info);
+    console.log(cardOne);
     const dispatch = useDispatch();
     const { id }  = useParams();
     const player = sessionStorage.getItem('player');
@@ -35,31 +37,54 @@ function Game (){
         emitRealTime(`game/${id}`, game);
     }
     function hanldeSetHandPlayertwo (){
-        if (info){
-            info.playerTwoHand = hand;
-            upDateRealTime(`game/${id}`, info);
-            sessionStorage.setItem('ready', 'true');
+            console.log('holi');
+            const sethand = {
+                playerTwoHand: hand,
+            };
+            upDateRealTime(`game/${id}`, sethand);
         }
-    }
 
     function handlePick(pokemon, index){
-        pokemon.catch = false;
-        upDateRealTime(`game/${id}/playerOneHand/${index}`, pokemon)
-        const selectcard = pokemons.find(pokedata=>pokedata.id===parseInt(pokemon.id));
-        setCardOne(selectcard);
-    }
-    useEffect(() => {
-        if (player === 'PlayerOne') {
-            hanldeSetHandPlayerOne ();
-        } else if (player === 'PlayerTwo' && info) {
-            hanldeSetHandPlayertwo ();
+        if (player === 'playerOne'){
+            const selectcard = pokemons.find(pokedata=>pokedata.id===parseInt(pokemon.id));
+            setCardOne(selectcard);
+            pokemon.catch = false;
+            upDateRealTime(`game/${id}/playerOneHand/${index}`, pokemon)
+            
+        }else{
+            const selectcard = pokemons.find(pokedata=>pokedata.id===parseInt(pokemon.id));
+            setCardTwo(selectcard);
+            pokemon.catch = false;
+            upDateRealTime(`game/${id}/playerTwoHand/${index}`, pokemon)
+            
         }
-        dispatch(getinfo(userid));
-    }, []);
+    }
+    useEffect(()=>{
+        if (player === 'playerOne'){
+            const setcard = {
+                playerOneCard: cardOne,
+            }
+            upDateRealTime(`game/${id}`, setcard)
+        }else{
+            const setcard = {
+                playerTwoCard: cardTwo,
+            }
+            upDateRealTime(`game/${id}`, setcard)
+        }
+    },[cardOne, cardTwo])
 
     useEffect(() => {
         listeningRealTime(`game/${id}`, setInfo);
     }, [id]);
+
+    useEffect(() => {
+            if (player === 'playerOne' && !info) {
+                hanldeSetHandPlayerOne ();
+            } else if (!info) {
+                hanldeSetHandPlayertwo ();
+            }
+            dispatch(getinfo(userid));
+        }, []);
 
     return (
         <div>
@@ -68,9 +93,9 @@ function Game (){
                 {player === 'playerOne' ?
                 <div>
                     <div className="game__handtwo--container">
-                        {info  ?
+                        {info ?
                             <div className="game__handtwo--cards">
-                                 {info.playerTwoHand ?
+                                {info.playerTwoHand ?
                                  info.playerTwoHand.map((pokedata, index)=>
                                     pokedata.catch === true ?
                                     <div onClick={()=>handlePick(pokedata, index)} className="img_container" key ={index}>
@@ -101,20 +126,26 @@ function Game (){
                         }   
                         </div>
                         <img className="game__battlecard--img" src={versus} alt="pokeball"/>
+                        {info?
                         <div className="game__battlecard--cardtwo">
-                        {cardTwo.id?
+                        {info.playerTwoCard && cardOne.cath?
                             <PokemonCard
-                            catch={cardTwo.cath}
-                            name={cardTwo.name.english}
-                            id={cardTwo.id}
-                            status={cardTwo.base}
-                            type={cardTwo.type}
-                            image={cardTwo.background}
-                            key={cardTwo.id}
+                            catch={info.playerTwoCard.cath}
+                            name={info.playerTwoCard.name.english}
+                            id={info.playerTwoCard.id}
+                            status={info.playerTwoCard.base}
+                            type={info.playerTwoCard.type}
+                            image={info.playerTwoCard.background}
+                            key={info.playerTwoCard.id}
                             />
+                        :info.playerTwoCard ?
+                            <img src={pokecard} alt="waitting" className="game__battlecard--waiting"/>
                         :<img src={shadow2} alt="waitting" className="game__battlecard--waiting"/>
+
                         }
                         </div>
+                        :null
+                        }
                     </div>
                     <div className="game__hand--container" >
                         {
@@ -142,10 +173,10 @@ function Game (){
                 :player === 'playerTwo' ?
                 <div>
                     <div className="game__handtwo--container">
-                        {info !== undefined ?
+                        {info ?
                             <div className="game__handtwo--cards">
-                                 {info.playerTwohand ?
-                                 info.playerTwohand.map((pokedata, index)=>
+                                {info.playerOneHand ?
+                                 info.playerOneHand.map((pokedata, index)=>
                                     pokedata.catch === true ?
                                     <div onClick={()=>handlePick(pokedata, index)} className="img_container" key ={index}>
                                         <p className='img-Text'>Unknow</p>
@@ -154,27 +185,30 @@ function Game (){
                                         </div>    
                                     :null
                                     )
-                                :<h1 className="game__handtwo--waiting">waiting for opponent...</h1>
+                                :null
                                 }
                             </div>
-                        :null 
-                        }
+                        :null }
                     </div>
                     <div className="game__battlecards--container">
+                        {info?
                         <div className="game__battlecard--cardone">
-                        {cardOne.id?
+                        {info.playerOneCard && cardTwo.cath?
                             <PokemonCard
-                            catch={cardOne.cath}
-                            name={cardOne.name.english} 
-                            id={cardOne.id}
-                            status={cardOne.base}
-                            type={cardOne.type}
-                            image={cardOne.background}
-                            key={cardOne.id}
+                            catch={info.playerOneCard.cath}
+                            name={info.playerOneCard.name.english} 
+                            id={info.playerOneCard.id}
+                            status={info.playerOneCard.base}
+                            type={info.playerOneCard.type}
+                            image={info.playerOneCard.background}
+                            key={info.playerOneCard.id}
                             />
+                        :info.playerOneCard?
+                            <img src={pokecard} alt="waitting" className="game__battlecard--waiting"/>
                         :<img src={shadow1} alt="waitting" className="game__battlecard--waiting"/>
                         }   
                         </div>
+                        :null}
                         <img className="game__battlecard--img" src={versus} alt="pokeball"/>
                         <div className="game__battlecard--cardtwo">
                         {cardTwo.id?
