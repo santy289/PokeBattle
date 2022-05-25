@@ -13,7 +13,7 @@ return(
     <div>
         <Header/>
         <PokemonCard
-        catch={pokemon.cath}
+        catch={pokemon.catch}
         name={pokemon.name.english} 
         id={pokemon.id}
         status={pokemon.base}

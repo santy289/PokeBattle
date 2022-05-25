@@ -18,11 +18,56 @@
     height: auto;
     margin: 5%;
     padding: 0px 20px;
+    padding-bottom: 10px;
     box-shadow: 0px 0px 10px rgb(228, 84, 79);
+}
+.lobby__main--list--item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    padding-bottom: 10px;
+    box-shadow: 0px 1px 0px 0px rgb(228, 84, 79);
 }
 .lobby__main--title{
     margin-bottom: 20px;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: bold;
     color: rgb(228, 84, 79);
+    box-shadow: 0px 1px 0px 0px rgb(228, 84, 79);
+}
+.lobby__main--list_id{
+    font-size: 1.2rem;
+    color: rgb(228, 84, 79);
+}
+.lobby__main--list_player{
+    font-size: 1.2rem;
+    color: rgb(228, 84, 79);
+}
+.lobby__join--button{
+    width: 100px;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid rgb(228, 84, 79);
+    background-color: rgb(228, 84, 79);
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}
+@keyframes blink {
+    0%   {opacity: 0}
+    20%  {opacity: 0}
+    40%  {opacity: 0.5}
+    60% {opacity: 1}
+    80%  {opacity: 0.5}
+    100% {opacity: 0}
+}
+.lobby__main--playing{
+    animation: blink 1s infinite;
+    
 }

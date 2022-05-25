@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { updateDoc } from 'firebase/firestore';
-import NewCards from './NewCards'
-import PokemonCard from '../pokecard/PokemonCard';
+import NewCards from '../../components/newCards/NewCards'
+import PokemonCard from '../../components/pokecard/PokemonCard';
 
 function Buy (){
     const dispatch = useDispatch();

@@ -5,6 +5,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import pokemons from '../../assets/data.json';
+import './register.css';
 
 const auth = getAuth();
 
@@ -34,6 +35,7 @@ function Login () {
 return(
     <div>
         <Header />
+        <div className="login__from--container">
         <Formik
             initialValues={{ 
                 nickname: '', 
@@ -68,22 +70,23 @@ return(
             }}
         >
             {({ isSubmitting }) => (
-                <Form>
+                <Form className="form__container">
                     <label htmlFor="nickname">Nickname</label>
-                    <Field type="text" name="nickname" placeholder="Nickname" />
+                    <Field className="home__login--input" type="text" name="nickname" placeholder="Nickname" />
                     <ErrorMessage name="nickname" component="div" />
                     <label htmlFor="email">Email</label>
-                    <Field type="email" name="email" placeholder="email" />
+                    <Field className="home__login--input" type="email" name="email" placeholder="email" />
                     <ErrorMessage name="email" component="div" />
                     <label htmlFor="password">Password</label>
-                    <Field type="password" name="password" placeholder="password" />
+                    <Field className="home__login--input" type="password" name="password" placeholder="password" />
                     <ErrorMessage name="password" component="div" />
-                    <button type="submit" disabled={isSubmitting}>
+                    <button className="home__login--button" type="submit" disabled={isSubmitting}>
                         Submit
                     </button>
                 </Form>
             )}
         </Formik>
+        </div>
     </div>
 )
 }

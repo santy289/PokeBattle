@@ -46,7 +46,6 @@ import './lobby.css';
         navigate('/game/' + id);
     }
     useEffect(() => {
-        setRooms(totalRoom);
         dispatch(getRooms('rooms'));
         listeningRealTime('rooms', setRooms)
     }, [totalRoom, dispatch]);
@@ -61,13 +60,13 @@ import './lobby.css';
                         <div className="lobby__main--list--item" key={room.roomId}>
                             {room.playerone ?
                             <div>
-                            <p className="lobby__main--list_id">Room id: {room.roomId}</p>
-                            <p className="lobby__main--list_player">player one: {room.playerone}</p>
-                            <p className="lobby__main--list_player">player two: {room.playertwo}</p>
-                            {!room.playplayertwo ?
+                            <p className="lobby__main--list_id"><b>Room id:</b> {room.roomId}</p>
+                            <p className="lobby__main--list_player"><b>player one:</b> {room.playerone}</p>
+                            <p className="lobby__main--list_player"><b>player two:</b> {room.playertwo}</p>
+                            {!room.playertwo ?
                                 <button onClick={()=>handleJoinRoom(room.roomId, index)} className="lobby__join--button">Join</button>
                                 :
-                                <p>Room is full</p>
+                                <p className="lobby__main--playing">playing...</p>
                             }
                             </div>
                             : null

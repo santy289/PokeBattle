@@ -5,3 +5,6 @@ export const ROUTE_REGISTER = '/register';
 export const ROUTE_USERPROFILE = '/profile';
 export const ROUTE_LOBBY = '/lobby';
 export const ROUTE_GAME = '/game/:id';
+export const ROUTE_LOSE = '/lose/:id';
+export const ROUTE_WIN = '/win/:id';
+export const ROUTE_BUY = '/buy';

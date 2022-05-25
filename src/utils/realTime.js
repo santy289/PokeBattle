@@ -1,5 +1,5 @@
 import {
-    ref, onValue, set, update,
+    ref, onValue, set, update, remove
   } from 'firebase/database';
   import { realTimeDB } from '../config/firebase';
   
@@ -21,4 +21,8 @@ import {
   export async function upDateRealTime(channel, object) {
     const refEmit = ref(realTimeDB, channel);
     update(refEmit, object, { merge: true });
+  }
+  export async function removeRealTime(channel, object) {
+    const refEmit = ref(realTimeDB, channel);
+    remove(refEmit, object, { merge: true });
   }

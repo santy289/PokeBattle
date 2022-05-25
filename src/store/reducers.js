@@ -12,7 +12,7 @@ const initialValues = {
         points: 0,
         hand: [],
         pokemons: [],
-        username: '',
+        userName: '',
     },
     totalRooms: [],
     game: {},
