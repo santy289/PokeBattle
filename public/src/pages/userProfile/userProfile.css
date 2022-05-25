@@ -1,0 +1,38 @@
+.user-profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.user__profile--img{
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin-top: 20px;
+}
+.profile_main--name{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    color: rgb(228, 84, 79);
+}
+.profile_main--email{
+    font-size: 1rem;
+    margin-top: 10px;
+    color: rgb(228, 84, 79);
+}
+.profile_main--pokePoints{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    color: rgb(228, 84, 79);
+}
+.user__profile--tittle{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 20px;
+    color: rgb(228, 84, 79);
+}

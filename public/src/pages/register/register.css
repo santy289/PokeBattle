@@ -1,0 +1,23 @@
+.login__from--container{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #ffffff;
+}
+.form__container{
+    background-image: url(../../assets/background.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+    align-items: center;
+    justify-content: center;
+    width: 26%;
+    height: 150%;
+}
