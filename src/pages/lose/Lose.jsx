@@ -8,7 +8,7 @@ function Lose () {
     return(
         <div>
         <Header/>   
-           <div className="win-container">
+           <div className="lose-container">
      <img src={pikaLose} alt="pikaWin" className="win-img"/> 
      <h1>You Lose </h1>
      <div className="win__Buttons--container">

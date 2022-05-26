@@ -2,3 +2,11 @@
     padding-left: 100px;
     margin-top: 20px;
 }
+.lose-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    width: 100vw;
+    background-color: #ffffff;
