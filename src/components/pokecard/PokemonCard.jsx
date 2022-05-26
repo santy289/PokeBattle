@@ -6,6 +6,8 @@ import black from '../../assets/blackball.png'
 import { useSelector, useDispatch } from 'react-redux';
 import { getinfo } from '../../store/actions';
 import { useParams } from 'react-router-dom';
+import bag from '../../assets/Bag.png';
+import send from '../../assets/send.png'
 
 
 function PokemonCard (props){
@@ -49,8 +51,8 @@ function PokemonCard (props){
                     <img className="pokemon__card--logo" src={image} alt="pokecard"></img>
                     {id.length < 4 ?
                     <div>
-                     <button onClick={handleClearHand} className="card__tittle--button_clear">Clear Hand</button>
-                    <button onClick={()=>handleAddHand(props)} className="pokemon__card--button">Add to my hand</button>
+                     <img src={send} alt="send"onClick={handleClearHand} className="card__tittle--button_clear"/>
+                    <img src={bag} alt="pokebag" onClick={()=>handleAddHand(props)} className="pokemon__card--button"/>
                     </div>
                     :null
                     }

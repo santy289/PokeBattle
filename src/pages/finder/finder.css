@@ -3,4 +3,10 @@
     align-items: center;
     width: 100%;
     padding: 0px 20px;
+    justify-content: center
+}
+.finder__hand--title{
+    margin: 0;
+    text-align: center;
+    color: rgb(228, 84, 79);
 }

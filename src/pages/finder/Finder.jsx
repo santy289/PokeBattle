@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PokemonCard from '../../components/pokecard/PokemonCard';
 import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
 import './finder.css';
 
 function Finder(){
@@ -21,8 +22,8 @@ return(
         image={pokemon.background}
         key={pokemon.id}
         />
+        <h1 className="finder__hand--title">Your bag: </h1>
         <div className="finder__hand--container">
-            <h1>Your hand: </h1>
          {
             hand.map((pokedata, index)=>
                 pokedata.id<10 && pokedata.catch === true ?
@@ -44,6 +45,7 @@ return(
                 )
         }
         </div>
+        <Footer/>
     </div>
     
 )
