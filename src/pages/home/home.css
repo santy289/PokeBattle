@@ -1,50 +1,37 @@
-.home__main--container{
-    min-width: 100%;
-    width: fit-content;
-}
+
 .home__body--container{
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    height: 100vh;
     justify-content: space-between;
 }
 .home__body--image_left{
-    margin-left: 10%;
-    width: 400px;
+    width: 20%;
     height: auto;
 }
 .home__body--image_right{
-    margin-right: 10%;
-    width: 400px;
+    width: 20%;
     height: auto;
 }
 .home__login--container{
+    background-image: url(../../assets/background.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 95%;
     min-width: 350px;
+    max-height: 1000px;
     display: flex;
-    width: 350px;
+    width: 50%;
+    max-width: 480px;
     align-items: center;
     justify-content: center;
 }
-.home__login--background{
-    min-width: 350px;
-    width: 25%;
-    margin-top: 10%;
-    height: auto;
-    position: absolute;
-    background-color: rgb(228, 84, 79);
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgb(228, 84, 79);
-}
 .home__login--form{
-    width: 20%;
+    margin-top: 30%;
+    width: 100%;
     display: flex;
-    margin-top: 4%;
-    margin-left: -10%;
     flex-direction: column; 
-    position: absolute;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: auto;
@@ -105,13 +92,12 @@
     cursor: pointer;
 }
 .home__loged--container{
-     width: 20%;
+    width: 90%;
     display: flex;
-    margin-top: 25%;
+    margin-top: 20%;
     flex-direction: column; 
     flex-direction: column;
     align-items: center;
-    position: absolute;
     justify-content: center;
     height: auto;
 

@@ -1,6 +1,7 @@
 import Header from '../../components/header/Header';
 import pikaLose from '../../assets/PikaLose.png'
 import { Link } from 'react-router-dom'
+import Footer from '../../components/footer/Footer';
 import './lose.css'
 
 function Lose () {
@@ -17,6 +18,7 @@ function Lose () {
      </div>
      
      </div>
+        <Footer/>
      </div>
     
     )

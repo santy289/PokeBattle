@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { listeningRealTime, upDateRealTime } from '../../utils/realTime'
+import Footer from "../../components/footer/Footer";
 import './lobby.css';
 
  function Lobby () {
@@ -77,6 +78,7 @@ import './lobby.css';
             </div>
 
         </div>
+        <Footer />
         </div>
     )
 }

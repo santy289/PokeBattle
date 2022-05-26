@@ -12,6 +12,7 @@ import Mewtwo from '../../assets/mewtwo.png';
 import logout from '../../assets/logout.svg';
 import './home.css';
 import Background from '../../assets/background.jpg';
+import Footer from '../../components/footer/Footer';
 
 function Home () {
     const id = sessionStorage.getItem('userId');
@@ -53,7 +54,6 @@ function Home () {
             <div className="home__body--container">
                 <img  className="home__body--image_left" src={Mew} alt="mew" />
                 <div className="home__login--container">
-                    <img className="home__login--background" src={Background} alt="pokedex" />
                     {loginStatus === false ?
                     <Formik 
                     initialValues={{ email: '', password: '' }}
@@ -108,6 +108,7 @@ function Home () {
                 </div>
                 <img className="home__body--image_right" src={Mewtwo} alt="mewtwo" />
             </div>
+            <Footer />
         </div>
 
     )

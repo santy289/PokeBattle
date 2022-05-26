@@ -1,10 +1,7 @@
 import Header from '../../components/header/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { emitRealTime, listeningRealTime, upDateRealTime} from '../../utils/realTime';
-import { deleteDocById } from '../../utils/services';
 import { useEffect, useState } from 'react';
-import { db } from '../../config/firebase.js';
-import { doc, updateDoc } from 'firebase/firestore';
 import PokemonCard from '../../components/pokecard/PokemonCard';
 import LifeBar from '../../components/lifebar/lifebar'
 import { getinfo } from '../../store/actions';
@@ -16,13 +13,13 @@ import unknow from '../../assets/unknownicon.png';
 import pokecard from '../../assets/pokecard.png'
 import battle from '../../utils/battle';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../components/footer/Footer';
 
 import './game.css';
 
 function Game (){
     const navigate = useNavigate();
     const userid = sessionStorage.getItem('userId');
-    const [rooms, setRooms] = useState([]);
     const [cardOne , setCardOne] = useState(null);
     const [cardTwo , setCardTwo] = useState(null);
     const [info, setInfo] = useState(null);
@@ -371,7 +368,7 @@ function Game (){
                 :null
                 }
             </div>
-
+                <Footer/>
         </div>
 
     )

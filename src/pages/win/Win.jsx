@@ -1,7 +1,6 @@
-import { removeRealTime, listeningRealTime, upDateRealTime} from '../../utils/realTime';
+import { listeningRealTime } from '../../utils/realTime';
 import Header from '../../components/header/Header';
 import pikaWin from '../../assets/PikaWin.png'
-import { getRooms } from '../../store/actions'
 import { db } from '../../config/firebase.js';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
@@ -10,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { getinfo } from '../../store/actions';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import Footer from '../../components/footer/Footer';
 import './win.css'
 
 function Win() {
@@ -55,6 +55,7 @@ function Win() {
         </div>
         
         </div>
+              <Footer/>
         </div>
        
     )

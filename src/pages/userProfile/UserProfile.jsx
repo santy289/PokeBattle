@@ -1,6 +1,7 @@
 import Header from "../../components/header/Header";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Footer from "../../components/footer/Footer"
 import './userProfile.css'
 
 
@@ -47,7 +48,7 @@ return (
   :null
   }
 </div>
-
+<Footer/>
 </div>
 )
 }
