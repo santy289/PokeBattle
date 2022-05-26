@@ -53,7 +53,7 @@ import './lobby.css';
     return(
         <div>
             <Header />
-            <button onClick={handleCreateRoom} className="lobby__create--button">Create Gaming Room</button>
+            <button onClick={handleCreateRoom} className="lobby__create--button">Create Room</button>
             <div className="lobby__main--container">
                 <h1 className="lobby__main--title">Lobby</h1>
                 <div className="lobby__main--list">
